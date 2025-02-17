@@ -1,0 +1,19 @@
+name: Run Python Script
+
+on: [push, pull_request]  # Runs on every push or PR
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest  # Uses the latest Ubuntu server
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"  # Change to your required version
+
+      - name: Run Python Script
+        run: python factscript.py
