@@ -42,7 +42,7 @@
     0% { 
         transform: translateX(0); /* Start fully visible */
     }
-    5% { 
+    10% { 
         transform: translateX(0); /* Pause for longer at the start (15% of animation time) */
     }
     85% { 
@@ -70,7 +70,7 @@
     </div>
 
     <script>
-$(document).ready(function() {
+ $(document).ready(function() {
     $.ajax({
         method: 'GET',
         url: 'https://api.api-ninjas.com/v1/facts',
@@ -82,20 +82,25 @@ $(document).ready(function() {
                 let factText = $("#fact-text");
                 factText.text(result[0].fact);
 
-                // Wait a bit for text rendering, then calculate width
                 setTimeout(function() {
-                    let textWidth = factText.width(); // Get actual text width
-                    let containerWidth = $("#fact-container").width();
+                    let textWidth = factText.width(); // Get full text width
+                    let containerWidth = $("#fact-container").width(); // Get visible area
 
-                    // Adjust animation duration dynamically based on text length
-                    let animationDuration = Math.max(10, textWidth / 20) + "s"; // Adjust speed factor
+                    let animationSpeedFactor = 8; // Adjust for smoother scrolling
+                    let baseDuration = (textWidth / animationSpeedFactor); 
+                    let pauseStart = 5; // Longer pause at start (5s)
+                    let pauseEnd = 5; // Longer pause when last word is at the right
+                    let totalDuration = baseDuration + pauseStart + pauseEnd; 
 
-                    // Apply animation with correct width
+                    // Adjust start position so maximum words are visible initially
+                    let startPosition = Math.max(0, containerWidth - textWidth); 
+
                     factText.css({
-                        "animation": `ticker ${animationDuration} linear infinite`,
-                        "width": textWidth + "px" // Ensures the text does not get cut off
+                        "animation": `ticker ${totalDuration}s linear infinite`,
+                        "width": textWidth + "px",
+                        "left": startPosition + "px"
                     });
-                }, 100); // Small delay for proper text rendering
+                }, 100); 
             }
         },
         error: function(jqXHR) {
