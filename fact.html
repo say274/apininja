@@ -54,35 +54,30 @@
     </div>
 
     <script>
-        async function fetchFact() {
-            try {
-                const apiUrl = 'https://api.api-ninjas.com/v1/facts?limit=1';
-                const response = await fetch(apiUrl, {
-                    headers: {
-                        'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF'
-                    }
-                });
-
-                if (!response.ok) {
-                    document.getElementById('fact-text').innerText = "Error fetching data";
-                    return;
-                }
-
-                const data = await response.json();
-                document.getElementById('fact-text').innerText = data[0].fact;
-
-                // Reset animation to restart when new text loads
-                let factText = document.getElementById('fact-text');
-                factText.style.animation = 'none';
-                setTimeout(() => {
-                    factText.style.animation = 'ticker 10s linear infinite';
-                }, 10); // Small delay to restart animation
-            } catch (error) {
-                document.getElementById('fact-text').innerText = "API Error";
+       async function fetchFact() {
+    try {
+        const apiUrl = 'https://api.api-ninjas.com/v1/facts?limit=1';
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF', // Correct API Key
+                'Content-Type': 'application/json' // Ensure JSON request
             }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
 
-        fetchFact();
+        const data = await response.json();
+        document.getElementById('fact-container').innerText = data[0].fact;
+    } catch (error) {
+        console.error("API Fetch Error:", error);
+        document.getElementById('fact-container').innerText = "Failed to load fact.";
+    }
+}
+
+fetchFact();
     </script>
 
 </body>
