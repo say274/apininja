@@ -55,16 +55,21 @@
     </div>
 
     <script>
-$.ajax({
+$(document).ready(function() {
+    $.ajax({
     method: 'GET',
     url: 'https://api.api-ninjas.com/v1/facts',
-    headers: { 'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF'},
+    headers: { 'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF' },
     contentType: 'application/json',
     success: function(result) {
-        console.log(result);
+        console.log(result); // ✅ Logs the result
+        if (result.length > 0) {
+            $("#fact-text").text(result[0].fact); // ✅ Displays the first fact
+        }
     },
-    error: function ajaxError(jqXHR) {
+    error: function(jqXHR) {
         console.error('Error: ', jqXHR.responseText);
+        $("#fact-text").text("Error loading fact.");
     }
 });
     </script>
