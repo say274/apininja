@@ -54,30 +54,19 @@
     </div>
 
     <script>
-       async function fetchFact() {
-    try {
-        const apiUrl = 'https://api.api-ninjas.com/v1/facts?limit=3';
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF', // Correct API Key
-                'Content-Type': 'application/json' // Ensure JSON request
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        document.getElementById('fact-container').innerText = data[0].fact;
-    } catch (error) {
-        console.error("API Fetch Error:", error);
-        document.getElementById('fact-container').innerText = "Failed to load fact.";
+  var limit = 3;
+$.ajax({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/facts?limit=' + limit,
+    headers: { 'X-Api-Key': 'nuOR59lW4zN4/HegJpvVxQ==gHM4pDssDTOuF4PF'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
     }
-}
-
-fetchFact();
+});
     </script>
 
 </body>
