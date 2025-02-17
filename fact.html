@@ -38,31 +38,31 @@
         }
 
         /* Ticker animation */
-    @keyframes ticker {
+@keyframes ticker {
     0% { 
-        transform: translateX(50%); 
-        visibility: visible; /* Ensure text is always visible */
+        transform: translateX(0); /* Start fully visible */
     }
     5% {
-        transform: translateX(50%); /* Pause at start */
+        transform: translateX(0); /* Small pause at the start */
     }
     85% { 
-        transform: translateX(-200%); /* Scroll text fully */
+        transform: translateX(-100%); /* Gradually scroll left */
     }
     90% {
-        transform: translateX(-200%); /* Pause at end */
+        transform: translateX(-100%); /* Pause at the end */
     }
     100% { 
-        transform: translateX(-200%);
-        visibility: hidden; /* Prevent text from flashing when restarting */
+        transform: translateX(-100%);
     }
 }
 
-        #fact-text {
-    animation: ticker 15s linear infinite; /* Adjust duration for slower movement */
-    animation-fill-mode: forwards; /* Prevents flickering */
+/* Apply animation */
+#fact-text {
+    position: absolute;
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 15s linear infinite; /* Adjust speed */
 }
-
     </style>
 </head>
 <body>
