@@ -1,0 +1,58 @@
+
+    try {
+        const response = await fetch("https://your-api-url.com/api/v2/facts/random");
+        if (!response.ok) throw new Error("API request failed: " + response.status);
+        
+        const data = await response.json();
+        console.log("Random Fact:", data);
+
+        // Assuming the fact is inside data.fact (adjust based on API response)
+        document.getElementById("fact").innerText = data.fact A
+
+// Fetch fact on page load
+getRandomFact();<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Container</title>
+
+    <!-- Load Oswald Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Set the container size and properties */
+        .container {
+            width: 200px;
+            height: 120px;
+            overflow: hidden;
+            background: transparent; /* Transparent background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white; /* Optional: Add a border for visibility */
+        }
+
+        /* Style the text */
+        .text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 30px;
+            color: white; /* White text */
+            text-align: center;
+        }
+
+        /* Ensure the body has a dark background for contrast */
+        body {
+            background-color: black; /* Change to transparent if embedding */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <p class="text">Hello, World!</p>
+    </div>
+
+</body>
+</html>
+
