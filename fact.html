@@ -38,20 +38,26 @@
         }
 
         /* Ticker animation */
-     @keyframes ticker {
+    @keyframes ticker {
     0% { 
-        transform: translateX(50%); 
+        transform: translateX(100%); 
+        visibility: visible; /* Ensure text is always visible */
     }
-    10% { 
-        transform: translateX(50%); /* Pause at start */ 
+    5% {
+        transform: translateX(100%); /* Pause at start */
     }
-    90% { 
-        transform: translateX(-200%); /* Scroll completely */ 
+    85% { 
+        transform: translateX(-200%); /* Scroll text fully */
+    }
+    90% {
+        transform: translateX(-200%); /* Pause at end */
     }
     100% { 
-        transform: translateX(-200%); /* Pause at end */ 
+        transform: translateX(-200%);
+        visibility: hidden; /* Prevent text from flashing when restarting */
     }
 }
+
     </style>
 </head>
 <body>
